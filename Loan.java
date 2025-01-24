@@ -7,7 +7,7 @@ public class Loan {
     String userId; // Reference to the user who took the loan
 
     // Constructor
-    public Loan(String loanId, double loanAmount, double interestRate, String loanStatus, String userId) {
+    Loan(String loanId, double loanAmount, double interestRate, String loanStatus, String userId) {
         this.loanId = loanId;
         this.loanAmount = loanAmount;
         this.interestRate = interestRate;

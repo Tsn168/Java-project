@@ -6,7 +6,7 @@ public class History {
     String event; // Description of the event, e.g., "Loan Approved"
 
     // Constructor
-    public History(String historyId, String userId, String time, String event) {
+    History(String historyId, String userId, String time, String event) {
         this.historyId = historyId;
         this.userId = userId;
         this.time = time;
