@@ -6,4 +6,3 @@ public class Transaction {
         String user_ID;
     }
 }
-hi
