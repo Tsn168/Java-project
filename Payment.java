@@ -4,4 +4,5 @@ public class Payment{
     int payment_ID;
     String reciver;
     String payment_date;
+    Payment
 }
