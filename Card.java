@@ -1,6 +1,8 @@
 public class Card{
-    public static void main(String[] args) {
-        
-    }
-
+    String status;
+    String exp_date;
+    String card_ID;
+    String card_type;
+    int limit_acc;
+    
 }
