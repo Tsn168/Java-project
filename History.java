@@ -1,17 +1,15 @@
 // History.java
 public class History {
     String historyId;
-    String transactionType; // Example: "Loan Repayment", "Loan Disbursement"
-    String date;
-    double amount;
-    String loanId; // Reference to the associated loan
+    String userId; // Reference to the user associated with the history
+    String time; // Example: "2025-01-24 15:30:00"
+    String event; // Description of the event, e.g., "Loan Approved"
 
     // Constructor
-    public History(String historyId, String transactionType, String date, double amount, String loanId) {
+    public History(String historyId, String userId, String time, String event) {
         this.historyId = historyId;
-        this.transactionType = transactionType;
-        this.date = date;
-        this.amount = amount;
-        this.loanId = loanId;
+        this.userId = userId;
+        this.time = time;
+        this.event = event;
     }
 }
