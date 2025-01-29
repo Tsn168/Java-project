@@ -4,5 +4,4 @@ public class Card{
     String card_ID;
     String card_type;
     int limit_acc;
-    
 }
