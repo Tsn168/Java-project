@@ -4,12 +4,12 @@ public class Transaction {
     String transaction_type;
     String user_ID;
 
-    Transaction(){
+    /*Transaction(){
         amount=0;
         time="Empty";
         transaction_type="Empty";
         user_ID="Empty";
-    }
+    }*/
     Transaction(double a ,String b ,String c ,String d){
         amount=a;
         time=b;
