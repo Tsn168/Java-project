@@ -1,5 +1,6 @@
 
 public class Payment {
+
     static int totalPaymentAccount = 0;
     int user_ID;
     double amount;
