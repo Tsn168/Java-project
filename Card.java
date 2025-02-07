@@ -1,8 +1,6 @@
 import java.util.Date;
 import java.util.Random;
-
 public class Card{
-<<<<<<< HEAD
     String status;//Active or Freeze
     private String exp_date;//6 years exp
     private int card_num;//must be 16 digit
@@ -44,11 +42,5 @@ public class Card{
         }
 
     }
-=======
-    String status;
-    String exp_date;
-    String card_ID;
-    String card_type;
-    int limit_acc;
->>>>>>> 9f8d6d1b8e70b161fb96c562391dca3fec4b2c31
+    
 }
