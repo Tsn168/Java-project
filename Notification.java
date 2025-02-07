@@ -44,7 +44,7 @@ public class Notification {
     public String getFormattedNotification() {
         return " [User " + user_ID + "] " + message + " (at " + time + ")";
     }
-    
+    @Override
     public String toString() {
         return "Notification{" +
                "user_ID=" + user_ID +
