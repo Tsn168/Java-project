@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 
-// Loan.java
 public class Loan {
     private String loanId;
     private double loanAmount;
@@ -10,6 +9,9 @@ public class Loan {
 
     // Static list to store all loan records
     public static ArrayList<Loan> loanList = new ArrayList<>();
+
+    // Static loan account (default loan)
+    public static Loan staticLoanAccount = new Loan("L000", 0.0, 0.0, "Inactive", "DefaultUser");
 
     // Constructor
     public Loan(String loanId, double loanAmount, double interestRate, String loanStatus, String userId) {
@@ -28,5 +30,13 @@ public class Loan {
                     ", Interest: " + loan.interestRate + "%, Status: " + loan.loanStatus +
                     ", User ID: " + loan.userId);
         }
+    }
+
+    // Static method to display the static loan account
+    public static void displayStaticLoanAccount() {
+        System.out.println("Static Loan Account:");
+        System.out.println("Loan ID: " + staticLoanAccount.loanId + ", Amount: " + staticLoanAccount.loanAmount +
+                ", Interest: " + staticLoanAccount.interestRate + "%, Status: " + staticLoanAccount.loanStatus +
+                ", User ID: " + staticLoanAccount.userId);
     }
 }
