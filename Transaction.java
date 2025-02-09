@@ -1,25 +1,21 @@
-public class Transaction {
-    double amount;
-    String time;
-    String transaction_type;
-    String user_ID;
+import java.util.Date;
 
-    /*Transaction(){
-        amount=0;
-        time="Empty";
-        transaction_type="Empty";
-        user_ID="Empty";
-    }*/
-    Transaction(double a ,String b ,String c ,String d){
-        amount=a;
-        time=b;
-        transaction_type=c;
-        user_ID=d;
+public class Transaction {
+    private String date;
+    private String description;
+    private double amount;
+
+    public Transaction(String description, double amount) {
+        this.date = new Date().toString();  // Timestamp of the transaction
+        this.description = description;
+        this.amount = amount;
     }
-    Transaction(double a ,String b ,String c){
-        amount=a;
-        transaction_type=b;
-        user_ID=c;
+
+    public String toString() {
+        return "Date: " + date + " | Description: " + description + " | Amount: $" + amount;
     }
-    
+
+    public String getDate() { return date; }
+    public String getDescription() { return description; }
+    public double getAmount() { return amount; }
 }
