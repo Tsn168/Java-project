@@ -2,7 +2,7 @@ import java.util.Random;
 import java.util.Date;
 import java.util.Calendar;
 
-public class Card {
+public class Card implements User {
     String status;  // Active or Freeze
     private String exp_date;  // Expiry date (6 years expiration)
     private long card_num;  // 16 digits
@@ -95,6 +95,8 @@ public class Card {
     public double getBalance() {
         return balance;
     }
-        
+    @Override
+    public void displayUserInfo(){
+    }
 
 }

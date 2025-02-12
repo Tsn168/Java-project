@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Account {
+public class Account implements User{
     private static int nextAccountNumber = 1000; // ✅ Auto-generates unique account numbers
     private static ArrayList<Account> allAccounts = new ArrayList<>(); // ✅ Stores all accounts
 
@@ -82,5 +82,9 @@ public class Account {
     @Override
     public String toString() {
         return "Account Number: " + accountNumber + ", Type: " + accountType + ", Balance: $" + balance + ", Owner: " + owner.getName();
+    }
+    @Override
+    public void displayUserInfo(){
+        
     }
 }
