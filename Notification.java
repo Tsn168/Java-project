@@ -1,7 +1,7 @@
 public class Notification {
     static int allMessage = 0; 
-    private int user_ID;
-    private String message;
+    private final int user_ID;
+    public String message;
     private String time;
     public Notification(int user_ID, String message, String time) {
         this.user_ID = user_ID;
@@ -21,10 +21,6 @@ public class Notification {
 
     public String getMessage() {
         return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public String getTime() {

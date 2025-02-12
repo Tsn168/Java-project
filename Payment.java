@@ -2,20 +2,20 @@ import java.util.ArrayList;
 
 public class Payment {
     static int payment_counter = 0;
-    private int user_ID;
-    public double amount;
-    private int payment_ID;
-    String reciver;
-    String payment_date;
+    private int user_ID; //who made the payment
+    public double amount; //the amount of money 
+    private int payment_ID; //whp get the payment
+    String receiver;//who  received the payment
+    String payment_date;// the date of payment
 
     // ArrayList to store payment instances
     static ArrayList<Payment> payments = new ArrayList<>();
 
     // Constructor
-    Payment(int user_ID, double amount, String reciver, String payment_date) {
+    Payment(int user_ID, double amount, String receiver, String payment_date) {
         this.user_ID = user_ID;
         this.amount = amount;
-        this.reciver = reciver;
+        this.receiver = receiver;
         this.payment_date = payment_date;
         this.payment_ID = ++payment_counter;
         payments.add(this); // Add the current payment to the ArrayList
@@ -46,12 +46,12 @@ public class Payment {
         this.payment_ID = payment_ID;
     }
 
-    public String getReciver() {
-        return reciver;
+    public String getReceiver() {
+        return receiver;
     }
 
-    public void setReciver(String reciver) {
-        this.reciver = reciver;
+    public void setReciver(String receiver) {
+        this.receiver = receiver;
     }
 
     public String getPayment_date() {
@@ -66,7 +66,7 @@ public class Payment {
     public static void displayPayments() {
         for (Payment payment : payments) {
             System.out.println("Payment ID: " + payment.payment_ID + ", User ID: " + payment.user_ID +
-                               ", Amount: " + payment.amount + ", Receiver: " + payment.reciver +
+                               ", Amount: " + payment.amount + ", Receiver: " + payment.receiver +
                                ", Date: " + payment.payment_date);
         }
     }
