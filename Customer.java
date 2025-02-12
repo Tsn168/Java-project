@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Customer implements User {
+public class Customer implements DisplayInfo {
     private static ArrayList<Customer> customerList = new ArrayList<>(); // ✅ Stores all registered customers
 
     private int customerID;
