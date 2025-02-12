@@ -10,7 +10,7 @@ public class Transaction {
         this.description = description;
         this.amount = amount;
     }
-
+    @Override
     public String toString() {
         return "Date: " + date + " | Description: " + description + " | Amount: $" + amount;
     }

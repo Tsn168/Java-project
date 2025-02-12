@@ -71,7 +71,6 @@ public class Card {
         makePurchase(amount);
     }
   
-    
     public void setCreditLimit(double limit) {
         creditLimit = limit;
         balance = limit;  // Initially, the balance is the credit limit.
