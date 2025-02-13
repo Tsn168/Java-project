@@ -2,7 +2,7 @@ import java.util.Random;
 import java.util.Date;
 import java.util.Calendar;
 
-public class Card  {
+public class Card {
     String status;  // Active or Freeze
     private String exp_date;  // Expiry date (6 years expiration)
     private long card_num;  // 16 digits
@@ -53,7 +53,7 @@ public class Card  {
     }
 
     public void Get_Card_info(String password) {
-        if (password.equals("1234")) {
+        if (password.equals(Customer.getpassword())) {//ex password of user is 1234
             System.out.println("Card Info: ");
             System.out.println("Card holder: " + card_holder);
             System.out.println("Status: " + status);
@@ -94,5 +94,5 @@ public class Card  {
     public double getBalance() {
         return balance;
     }
-        
+
 }
