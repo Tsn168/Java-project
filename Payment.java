@@ -64,12 +64,13 @@ public class Payment {
 
     // Method to display all payments
     public static void displayPayments() {
-        for (Payment payment : payments) {
-            System.out.println("Payment ID: " + payment.payment_ID + ", User ID: " + payment.user_ID +
+        for (Payment payment : payments) { //oayments is the arraylist of Payment 
+            System.out.println("Payment ID: " + payment.payment_ID + ", User ID: " + payment.user_ID + 
                                ", Amount: " + payment.amount + ", Receiver: " + payment.receiver +
                                ", Date: " + payment.payment_date);
         }
     }
+    
     // Method to get the total amount of all payments
     public static double getTotalAmount() {
         double total = 0;
