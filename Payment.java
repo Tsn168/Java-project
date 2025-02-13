@@ -82,7 +82,8 @@ public class Payment {
 
     // Method to find payment by user ID
     public static Payment findPaymentByUserID(int user_ID) {
-        for (Payment payment : payments) {
+        for (Payment payment : payments) //int i = 0; i < payment.amount; i++) 
+        {
             if (payment.getUser_ID() == user_ID) {
                 return payment;
             }
