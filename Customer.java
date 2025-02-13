@@ -1,44 +1,38 @@
 import java.util.ArrayList;
 
-public class Customer implements DisplayInfo {
-    private static ArrayList<Customer> customerList = new ArrayList<>(); // ✅ Stores all registered customers
-
+public class Customer extends User implements DisplayInfo {
+    private static ArrayList<Customer> customerList = new ArrayList<>(); // Stores all registered customers
     private int customerID;
     private String name;
-    private String email;
     private String phone;
     private String birthdate;
-    private String password;
-    private boolean loggedIn; // ✅ Tracks login status
-    private ArrayList<Account> accounts; // ✅ Stores customer's accounts
+    private String password; 
+    private ArrayList<Account> accounts; // Stores customer's accounts
+    private static int totalCustomers = 0; // Auto-increments customer ID
 
-    private static int totalCustomers = 0; // ✅ Auto-increments customer ID
-
-    // ✅ Constructor for Registration
+    // Constructor for Registration
     public Customer(String name, String email, String phone, String birthdate, String password) {
+        super(email, password); // Call User class constructor
         this.customerID = ++totalCustomers;
         this.name = name;
-        this.email = email;
         this.phone = phone;
         this.birthdate = birthdate;
-        this.password = password;
-        this.loggedIn = false;
         this.accounts = new ArrayList<>();
-        customerList.add(this); // ✅ Adds new customer to the list
+        customerList.add(this); // Adds new customer to the list
     }
 
-    // ✅ Constructor for Login (Used to check credentials)
+    // Constructor for Login (Used to check credentials)
     public Customer(String email, String password) {
-        this.email = email;
-        this.password = password;
+        super(email, password); // Call User class constructor
     }
 
-    // ✅ Login method (Finds matching email & password)
+    // Login method (Finds matching email & password)
+    @Override
     public boolean login() {
-        for (int i = 0; i < customerList.size(); i++) { // ✅ Normal for-loop (No Shortcut)
-            Customer customer = customerList.get(i); // ✅ Get customer at index `i`
+        for (int i = 0; i < customerList.size(); i++) {
+            Customer customer = customerList.get(i);
             
-            if (customer.email.equals(this.email) && customer.password.equals(this.password)) {
+            if (customer.getEmail().equals(this.getEmail()) && customer.password.equals(this.password)) {
                 customer.loggedIn = true;
                 System.out.println("Login Successful! Welcome, " + customer.name);
                 return true;
@@ -48,9 +42,10 @@ public class Customer implements DisplayInfo {
         return false;
     }
 
-    // ✅ Logout method
+    // Logout method
+    @Override
     public void logout() {
-        if (loggedIn) {
+        if (isLoggedIn()) {
             loggedIn = false;
             System.out.println("You have been logged out.");
         } else {
@@ -58,25 +53,20 @@ public class Customer implements DisplayInfo {
         }
     }
 
-    // ✅ Checks if the customer is logged in
-    public boolean isLoggedIn() {
-        return loggedIn;
-    }
-
-    // ✅ Adds an account to the customer
+    // Adds an account to the customer
     public void addAccount(Account account) {
         accounts.add(account);
     }
 
-    // ✅ Displays all account numbers and types (Only if logged in)
+    // Displays all account numbers and types (Only if logged in)
     public void displayAccountNumbers() {
-        if (loggedIn) {
+        if (isLoggedIn()) {
             if (accounts.isEmpty()) {
                 System.out.println("You have no accounts.");
             } else {
                 System.out.println("\nYour Accounts:");
-                for (int i = 0; i < accounts.size(); i++) { // ✅ Normal for-loop (No Shortcut)
-                    Account acc = accounts.get(i); // ✅ Get account at index `i`
+                for (int i = 0; i < accounts.size(); i++) {
+                    Account acc = accounts.get(i);
                     System.out.println("- Account Number: " + acc.getAccountNumber() + " (" + acc.getAccountType() + ")");
                 }
             }
@@ -85,23 +75,27 @@ public class Customer implements DisplayInfo {
         }
     }
 
-    // ✅ Getter for Name
+    // Getter for Name
     public String getName() {
         return name;
     }
 
-    // ✅ Getter for Email
+    // Getter for Email
+    @Override
     public String getEmail() {
-        return email;
+        return super.getEmail(); // Calls getEmail() from User class
     }
 
-    // ✅ toString() method (Displays customer details)
+    // toString() method (Displays customer details)
     @Override
     public String toString() {
-        return "Customer ID: " + customerID + ", Name: " + name + ", Email: " + email + ", Phone: " + phone +
+        return "Customer ID: " + customerID + ", Name: " + name + ", Email: " + getEmail() + ", Phone: " + phone +
                ", Birthdate: " + birthdate + ", Accounts: " + accounts.size();
     }
-    public void displayUserInfo(){
-        
+    
+    // Implementing DisplayInfo method (example method)
+    @Override
+    public void displayUserInfo() {
+        System.out.println("Customer Info: " + toString());
     }
 }
