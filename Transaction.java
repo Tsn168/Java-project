@@ -6,7 +6,7 @@ public class Transaction {
     private double amount;
 
     public Transaction(String description, double amount) {
-        this.date = new Date().toString();  // Timestamp of the transaction
+        this.date = new Date().toString(); 
         this.description = description;
         this.amount = amount;
     }
@@ -15,7 +15,13 @@ public class Transaction {
         return "Date: " + date + " | Description: " + description + " | Amount: $" + amount;
     }
 
-    public String getDate() { return date; }
-    public String getDescription() { return description; }
-    public double getAmount() { return amount; }
+    public String getDate(){ 
+        return date; 
+    }
+    public String getDescription() { 
+        return description; 
+    }
+    public double getAmount() {
+        return amount;
+    }
 }
