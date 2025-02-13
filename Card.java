@@ -71,17 +71,15 @@ public class Card  {
         makePurchase(amount);
     }
   
-    
     public void setCreditLimit(double limit) {
         creditLimit = limit;
-        balance = limit;  // Initially, the balance is the credit limit.
+        balance = limit; 
         System.out.println("Credit limit set to $" + creditLimit);
     }
     
     public void makePurchase(double amount) {
         if (balance >= amount) {
             balance -= amount;
-            addTransaction("Purchase", amount);
             System.out.println("Purchase successful! Remaining balance: $" + balance);
         } else {
             System.out.println("Insufficient funds.");
@@ -97,5 +95,4 @@ public class Card  {
         return balance;
     }
         
-
 }
