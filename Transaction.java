@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class Transaction {
+public class Transaction extends Card {
     private String date;
     private String description;
     private double amount;

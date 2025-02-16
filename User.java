@@ -37,7 +37,6 @@ public class User {
         return loggedIn;
     }
 
-    //  Getter for Email
     public String getEmail() {
         if (isLoggedIn()) {
             return email;
