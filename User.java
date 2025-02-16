@@ -1,10 +1,10 @@
-//inheritance
+// inheritance 
 public class User {
-    private String email;
-    private String password;
-    private boolean loggedIn;
+    protected String email;
+    protected String password;
+    protected boolean loggedIn;
 
-    // Constructor for User class
+    //  Constructor for Registration
     public User(String email, String password) {
         this.email = email;
         this.password = password;
@@ -12,18 +12,17 @@ public class User {
     }
 
     // Login method
-    public boolean login() {
+    public boolean login(String email, String password) {
         if (this.email.equals(email) && this.password.equals(password)) {
-            loggedIn = true;
+            this.loggedIn = true;
             System.out.println("Login Successful!");
             return true;
-        } else {
-            System.out.println("Login Failed: Incorrect email or password.");
-            return false;
         }
+        System.out.println("Login Failed: Incorrect email or password.");
+        return false;
     }
 
-    // Logout method
+    //  Logout method
     public void logout() {
         if (loggedIn) {
             loggedIn = false;
@@ -33,12 +32,50 @@ public class User {
         }
     }
 
-    // Getter for loggedIn status
+    //  Checks if the user is logged in
     public boolean isLoggedIn() {
         return loggedIn;
     }
-    
+
     public String getEmail() {
-        return email;
+        if (isLoggedIn()) {
+            return email;
+        } else {
+            System.out.println("Access Denied: Please log in to view your info.");
+            return null; 
+    }
+    }
+
+    //  Getter for Password
+    public String getPassword() {
+        if (isLoggedIn()) {
+            return password;
+        } else {
+            System.out.println("Access Denied: Please log in to view your info.");
+            return null; 
+        }
+    }
+
+    // Setter for Email
+    public void setEmail(String email) {
+        if (isLoggedIn()) {
+            this.email = email;
+        } else {
+            System.out.println("Access Denied: Please log in to update email.");
+        }
+    }
+    
+    // Setter for Password
+    public void setPassword(String password) {
+        if (isLoggedIn()) {
+            this.password = password;
+        } else {
+            System.out.println("Access Denied: Please log in to update password.");
+        }
+    }    
+
+    //  Placeholder for subclasses to implement
+    public void displayUserInfo() {
+        System.out.println("User Info: Email - " + email);
     }
 }

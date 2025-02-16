@@ -1,107 +1,99 @@
 import java.util.ArrayList;
 
-public class Customer implements DisplayInfo {
-    private static ArrayList<Customer> customerList = new ArrayList<>(); // ✅ Stores all registered customers
-
+public class Customer extends User implements DisplayInfo {  //  Inherits from `User`
+    private static ArrayList<Customer> customerList = new ArrayList<>();
     private int customerID;
     private String name;
-    private String email;
     private String phone;
     private String birthdate;
-    private String password;
-    private boolean loggedIn; // ✅ Tracks login status
-    private ArrayList<Account> accounts; // ✅ Stores customer's accounts
+    private ArrayList<Account> accounts;
 
-    private static int totalCustomers = 0; // ✅ Auto-increments customer ID
+    private static int totalCustomers = 0;
 
-    // ✅ Constructor for Registration
+    //  Constructor for Registration
     public Customer(String name, String email, String phone, String birthdate, String password) {
+        super(email, password); //  Calls User constructor
         this.customerID = ++totalCustomers;
         this.name = name;
-        this.email = email;
         this.phone = phone;
         this.birthdate = birthdate;
-        this.password = password;
-        this.loggedIn = false;
         this.accounts = new ArrayList<>();
-        customerList.add(this); // ✅ Adds new customer to the list
+        customerList.add(this);
     }
 
-    // ✅ Constructor for Login (Used to check credentials)
-    public Customer(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
-
-    // ✅ Login method (Finds matching email & password)
-    public boolean login() {
-        for (int i = 0; i < customerList.size(); i++) { // ✅ Normal for-loop (No Shortcut)
-            Customer customer = customerList.get(i); // ✅ Get customer at index `i`
-            
-            if (customer.email.equals(this.email) && customer.password.equals(this.password)) {
-                customer.loggedIn = true;
-                System.out.println("Login Successful! Welcome, " + customer.name);
-                return true;
-            }
-        }
-        System.out.println("Login Failed: Incorrect email or password.");
-        return false;
-    }
-
-    // ✅ Logout method
-    public void logout() {
-        if (loggedIn) {
-            loggedIn = false;
-            System.out.println("You have been logged out.");
-        } else {
-            System.out.println("You are not logged in.");
-        }
-    }
-
-    // ✅ Checks if the customer is logged in
-    public boolean isLoggedIn() {
-        return loggedIn;
-    }
-
-    // ✅ Adds an account to the customer
+    // Adds an account to the customer
     public void addAccount(Account account) {
         accounts.add(account);
     }
 
-    // ✅ Displays all account numbers and types (Only if logged in)
+    //  Displays all account numbers and types (Only if logged in)
     public void displayAccountNumbers() {
-        if (loggedIn) {
-            if (accounts.isEmpty()) {
-                System.out.println("You have no accounts.");
-            } else {
-                System.out.println("\nYour Accounts:");
-                for (int i = 0; i < accounts.size(); i++) { // ✅ Normal for-loop (No Shortcut)
-                    Account acc = accounts.get(i); // ✅ Get account at index `i`
-                    System.out.println("- Account Number: " + acc.getAccountNumber() + " (" + acc.getAccountType() + ")");
-                }
-            }
+
+    }
+
+    //  Getter for Name
+    public String getName() {
+        if (isLoggedIn()) {
+            return name;
         } else {
-            System.out.println("Access Denied: Please log in first.");
+            System.out.println("Access Denied: Please log in to view your name.");
+            return null; 
         }
     }
 
-    // ✅ Getter for Name
-    public String getName() {
-        return name;
+    //  Getter for Birthdate
+    public String getBirthdate() {
+        if (isLoggedIn()) {
+            return birthdate;
+        } else {
+            System.out.println("Access Denied: Please log in to view your name.");
+            return null;
+        }
     }
 
-    // ✅ Getter for Email
-    public String getEmail() {
-        return email;
+    //  Getter for Phone
+    public String getPhone() {
+        if (isLoggedIn()) {
+            return phone;
+        } else {
+            System.out.println("Access Denied: Please log in to view your name.");
+            return null;
+        }
     }
 
-    // ✅ toString() method (Displays customer details)
+    
+
+    public void setName(String name) {
+        if (isLoggedIn()) {
+            this.name = name;
+        } else {
+            System.out.println("Access Denied: Please log in to change your name.");
+        }
+    }
+    
+    public void setPhone(String phone) {
+        if (isLoggedIn()) {
+            this.phone = phone;
+        } else {
+            System.out.println("Access Denied: Please log in to change your phone number.");
+        }
+    }
+    
+    public void setBirthdate(String birthdate) {
+        if (isLoggedIn()) {
+            this.birthdate = birthdate;
+        } else {
+            System.out.println("Access Denied: Please log in to change your birthdate.");
+        }
+    }
+
+    //  Overriding `displayUserInfo()`
     @Override
-    public String toString() {
-        return "Customer ID: " + customerID + ", Name: " + name + ", Email: " + email + ", Phone: " + phone +
-               ", Birthdate: " + birthdate + ", Accounts: " + accounts.size();
-    }
-    public void displayUserInfo(){
-        
+    public void displayUserInfo() {
+        if (isLoggedIn()) {
+            System.out.println("Customer ID: " + customerID + ", Name: " + name + ", Email: " + email + ", Phone: " + phone);
+        } else {
+            System.out.println("Access Denied: Please log in to view your information.");
+        }
     }
 }

@@ -1,104 +1,95 @@
 import java.util.ArrayList;
 
-public class Account implements DisplayInfo {
-    private static int nextAccountNumber = 1000; // Auto-generates unique account numbers
-    private static ArrayList<Account> allAccounts = new ArrayList<>(); // Stores all accounts
+public class Account extends User implements DisplayInfo{  //  Inherits from User (for login)
+    private static int nextAccountNumber = 1000;  //  Generates unique account numbers
+    private static ArrayList<Account> allAccounts = new ArrayList<>();  //  Stores all accounts
 
     private int accountNumber;
     private double balance;
-    private String accountType; // "Saving" or "Normal"
+    private String accountType;
     private Customer owner;
 
-    // Constructor for Registering an Account (Auto-generates account number)
+    //  Constructor (Creates an account)
     public Account(double startBalance, String accountType, Customer owner) {
+        super(owner.getEmail(), owner.password); //  Uses Customer login details
         this.accountNumber = nextAccountNumber;
-        nextAccountNumber = nextAccountNumber + 1; // Increment account number
-
-        // to make sure the balance is not negative
-        if (startBalance < 0) {
-            this.balance = 0;
-        } else {
-            this.balance = startBalance;
-        }
-
+        nextAccountNumber++;  //  Increments for the next account
+        this.balance = startBalance;
         this.accountType = accountType;
         this.owner = owner;
-        allAccounts.add(this); // Add the current account to the list of all accounts
-        owner.addAccount(this); // Add current account to the owner's list of accounts
+        allAccounts.add(this);  //  Stores account in the list
+        owner.addAccount(this);  //  Links account to the owner
     }
 
-    // Getter for Account Number
+    //  Getter for Account Owner
+    public Customer getOwner() {
+        if (isLoggedIn()) {
+            return owner;
+        } else {
+            System.out.println("Access Denied: Please log in to view the account owner.");
+            return null; // Or throw an exception
+        }
+    }
+
+    //  Getter for Account Number
     public int getAccountNumber() {
-        return accountNumber;
+        if (isLoggedIn()) {
+            return accountNumber;
+        } else {
+            System.out.println("Access Denied: Please log in to view your account number.");
+            return -1; // Or throw an exception
+        }
     }
 
-    // Getter for Account Type
+    //  Getter for Account Type
     public String getAccountType() {
-        return accountType;
+        if (isLoggedIn()) {
+            return accountType;
+        } else {
+            System.out.println("Access Denied: Please log in to view your account type.");
+            return null; // Or throw an exception
+        }
     }
 
-    // Getter for Balance
-    public double getBalance() {
-        return balance;
-    }
-
-    // Deposit Money (Checks if logged in)
+    //  Deposit Money
     public void deposit(double amount) {
-        if (owner.isLoggedIn()) {
-            if (amount > 0) {
-                balance = balance + amount;
-                System.out.println("Deposit successful! New balance: $" + balance);
-            } else {
-                System.out.println("Invalid deposit amount. Must be greater than 0.");
-            }
-        } else {
-            System.out.println("Access Denied: Please log in first.");
-        }
+
     }
 
-    // Withdraw Money (Checks if logged in)
+    //  Withdraw Money
     public void withdraw(double amount) {
-        if (owner.isLoggedIn()) {
-            if (amount > 0) {
-                if (amount <= balance) {
-                    balance = balance - amount;
-                    System.out.println("Withdrawal successful! New balance: $" + balance);
-                } else {
-                    System.out.println("Error: Insufficient funds.");
-                }
-            } else {
-                System.out.println("Invalid withdrawal amount. Must be greater than 0.");
-            }
+
+    }
+
+    // Check Account Balance
+    public double getBalance() {
+        if (isLoggedIn()) {
+            return balance;
         } else {
-            System.out.println("Access Denied: Please log in first.");
+            System.out.println("Access Denied: Please log in to view your balance.");
+            return -1; // Or throw an exception
         }
     }
 
-    // Find Account by Account Number (No Shortcut)
+    //  Find an Account by Account Number
     public static Account findAccountByNumber(int accNum) {
-        for (int i = 0; i < allAccounts.size(); i++) { // Normal for-loop
-            Account acc = allAccounts.get(i); // Get account at index `i`
-
+        for (int i = 0; i < allAccounts.size(); i++) {  
+            Account acc = allAccounts.get(i);
             if (acc.accountNumber == accNum) {
-                return acc; // Returns the account if the number matches
+                return acc;
             }
         }
-        return null; // Returns null if no match is found
+        return null;  //  Returns null if no matching account is found
     }
 
-    // toString() method (Displays account details)
-    @Override
-    public String toString() {
-        return "Account Number: " + accountNumber + ", Type: " + accountType + ", Balance: $" + balance + ", Owner: " + owner.getName();
-    }
-
-    // DisplayUserInfo method (Implementation of DisplayInfo interface)
-    @Override
-    public void displayUserInfo() {
-        System.out.println("Account Information:");
-        System.out.println("Account Number: " + accountNumber);
-        System.out.println("Account Type: " + accountType);
-        System.out.println("Balance: $" + balance);
-        System.out.println("Owner: " + owner.getName());
+    //  Display Account Info
+    public void displayAccountInfo() {
+        if (isLoggedIn()) {
+            System.out.println("Account Number: " + accountNumber);
+            System.out.println("Account Type: " + accountType);
+            System.out.println("Balance: $" + balance);
+        } else {
+            System.out.println("Access Denied: Please log in to view your account information.");
+        }
     }
 }
