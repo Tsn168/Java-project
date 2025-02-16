@@ -45,7 +45,10 @@ public class Card {
         calendar.setTime(currentDate);
         int current_year = calendar.get(Calendar.YEAR);
         int current_month = calendar.get(Calendar.MONTH) + 1;  
-        
+        if(current_month==12){
+            current_month=0;
+        }
+
         exp_date = (current_month + 1) + "/" + (current_year + 6);
 
         System.out.println("Here is your new card that just got created: \n");
@@ -54,7 +57,7 @@ public class Card {
         System.out.println("EXP Date: " + exp_date);
         System.out.println("CVV: " + CVV);
         System.out.println("Card Number: " + number);
-        customer_cards.add(this);
+        customer_cards.add("Card Holder : "+name+"\nStatus : "+status+"\nEXP Date : "+exp_date+"\nCVV : "+CVV+"\nCard Number : "+number+"\n");
 
     }
 
