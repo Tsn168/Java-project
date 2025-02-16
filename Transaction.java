@@ -1,22 +1,22 @@
-import java.util.Date;
+import java.text.SimpleDateFormat;
 
-public class Transaction extends Card {
-    private String date;
+public class Transaction extends History {
     private String description;
     private double amount;
 
     public Transaction(String description, double amount) {
-        this.date = new Date().toString(); 
+        super();
         this.description = description;
         this.amount = amount;
     }
     @Override
     public String toString() {
-        return "Date: " + date + " | Description: " + description + " | Amount: $" + amount;
+        return "Date: " + time + " | Description: " + description + " | Amount: $" + amount +"| Name :" + user_name ;
     }
 
     public String getDate(){ 
-        return date; 
+        SimpleDateFormat formatter=new SimpleDateFormat();
+        return formatter.format(time); 
     }
     public String getDescription() { 
         return description; 

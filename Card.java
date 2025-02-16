@@ -1,6 +1,7 @@
 import java.util.Random;
 import java.util.Date;
 import java.util.Calendar;
+import java.util.ArrayList;
 
 public class Card {
     String status;  // Active or Freeze
@@ -11,7 +12,8 @@ public class Card {
     String card_holder;
     private double creditLimit;
     private double balance;
-
+    private String password;
+    private static ArrayList<String> customer_cards= new ArrayList<>();
     Card() {
         status = "Active";
         exp_date = "Empty";
@@ -19,6 +21,7 @@ public class Card {
         card_type = "Empty";
         CVV = 0;
         card_holder = "Unknown";
+        password="**";
     }
 
     Card(String holder, long number, String expirationDate) {
@@ -28,6 +31,7 @@ public class Card {
         status = "Active";
         CVV = new Random().nextInt(900) + 100; 
         card_type = "Visa";
+        password="**";
     }
 
     public void card_creation(String name) {
@@ -50,10 +54,12 @@ public class Card {
         System.out.println("EXP Date: " + exp_date);
         System.out.println("CVV: " + CVV);
         System.out.println("Card Number: " + number);
+        customer_cards.add(this);
+
     }
 
-    public void Get_Card_info(String password) {
-        if (password.equals(Customer.getpassword())) {//ex password of user is 1234
+    public void Get_Card_info(String password_in) {
+        if (password_in.equals(password)){//ex password of user is 1234
             System.out.println("Card Info: ");
             System.out.println("Card holder: " + card_holder);
             System.out.println("Status: " + status);
