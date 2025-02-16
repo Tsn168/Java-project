@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Account extends User {  //  Inherits from User (for login)
+public class Account extends User implements DisplayInfo{  //  Inherits from User (for login)
     private static int nextAccountNumber = 1000;  //  Generates unique account numbers
     private static ArrayList<Account> allAccounts = new ArrayList<>();  //  Stores all accounts
 
@@ -23,7 +23,12 @@ public class Account extends User {  //  Inherits from User (for login)
 
     //  Getter for Account Owner
     public Customer getOwner() {
-        return owner;
+        if (isLoggedIn()) {
+            return owner;
+        } else {
+            System.out.println("Access Denied: Please log in to view the account owner.");
+            return null; // Or throw an exception
+        }
     }
 
     //  Getter for Account Number

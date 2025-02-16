@@ -43,7 +43,7 @@ public class User {
             return email;
         } else {
             System.out.println("Access Denied: Please log in to view your info.");
-            return null; // Or throw an exception
+            return null; 
     }
     }
 
@@ -53,7 +53,7 @@ public class User {
             return password;
         } else {
             System.out.println("Access Denied: Please log in to view your info.");
-            return null; // Or throw an exception
+            return null; 
         }
     }
 
