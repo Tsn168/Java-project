@@ -8,6 +8,8 @@ public class Account implements DisplayInfo {
     private double balance;
     private String accountType; // "Saving" or "Normal"
     private Customer owner;
+    private String email;
+    private String password;
 
     // Constructor for Registering an Account (Auto-generates account number)
     public Account(double startBalance, String accountType, Customer owner) {

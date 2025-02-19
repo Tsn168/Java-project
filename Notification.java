@@ -1,6 +1,6 @@
 public class Notification {
     static int allMessage = 0; 
-    private final int user_ID;
+    private int user_ID;
     public String message;
     public String time;
     public Notification(int user_ID, String message, String time) {
