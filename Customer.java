@@ -1,99 +1,98 @@
 import java.util.ArrayList;
 
-public class Customer extends User implements DisplayInfo {  //  Inherits from `User`
-    private static ArrayList<Customer> customerList = new ArrayList<>();
+public class Customer extends Account {  // Customer now extends Account
+    private static ArrayList<Customer> customerList = new ArrayList<>(); // Stores all registered customers
+
     private int customerID;
     private String name;
     private String phone;
     private String birthdate;
-    private ArrayList<Account> accounts;
+    private String password;
+    private boolean loggedIn; // Tracks login status
+    private static int totalCustomers = 0; // Auto-increments customer ID
 
-    private static int totalCustomers = 0;
-
-    //  Constructor for Registration
-    public Customer(String name, String email, String phone, String birthdate, String password) {
-        super(email, password); //  Calls User constructor
+    // Constructor for Registration
+    public Customer(String name, String email, String phone, String birthdate, String password, double startBalance, String accountType, boolean isAdmin) {
+        super(startBalance, accountType, null, email, password, isAdmin);  // Calls Account constructor
         this.customerID = ++totalCustomers;
         this.name = name;
         this.phone = phone;
         this.birthdate = birthdate;
-        this.accounts = new ArrayList<>();
-        customerList.add(this);
+        this.loggedIn = false;
+        this.email = email;
+        customerList.add(this); // Adds new customer to the list
     }
 
     // Adds an account to the customer
     public void addAccount(Account account) {
         accounts.add(account);
+    // Constructor for Login (Used to check credentials)
+    public Customer(String email, String password) {
+        super(0, "Normal", null, email, password, false);  // Placeholder values for Account constructor
+        this.email = email;
+        this.password = password;
     }
 
-    //  Displays all account numbers and types (Only if logged in)
-    public void displayAccountNumbers() {
-
-    }
-
-    //  Getter for Name
-    public String getName() {
-        if (isLoggedIn()) {
-            return name;
-        } else {
-            System.out.println("Access Denied: Please log in to view your name.");
-            return null; 
+    // Login method (Finds matching email & password)
+    public boolean login() {
+        for (Customer customer : customerList) {
+            if (customer.email.equals(this.email) && customer.password.equals(this.password)) {
+                customer.loggedIn = true;
+                System.out.println("Login Successful! Welcome, " + customer.name);
+                return true;
+            }
         }
+        System.out.println("Login Failed: Incorrect email or password.");
+        return false;
     }
 
-    //  Getter for Birthdate
-    public String getBirthdate() {
-        if (isLoggedIn()) {
-            return birthdate;
-        } else {
-            System.out.println("Access Denied: Please log in to view your name.");
-            return null;
-        }
-    }
-
-    //  Getter for Phone
-    public String getPhone() {
-        if (isLoggedIn()) {
-            return phone;
+    // Logout method
+    public void logout() {
+        if (loggedIn) {
+            loggedIn = false;
+            System.out.println("You have been logged out.");
         } else {
             System.out.println("Access Denied: Please log in to view your name.");
             return null;
         }
     }
 
-    
+    // Checks if the customer is logged in
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
 
-    public void setName(String name) {
-        if (isLoggedIn()) {
-            this.name = name;
-        } else {
-            System.out.println("Access Denied: Please log in to change your name.");
+    // Add account to the customer
+    public void addAccount(Account account) {
+        if (account != null) {
+            super.setBalance(account.getBalance());  // Use inherited method from Account to set balance
+            System.out.println("Account added to " + name);
         }
     }
-    
-    public void setPhone(String phone) {
-        if (isLoggedIn()) {
-            this.phone = phone;
+
+    // Display account details if logged in
+    public void displayAccountDetails() {
+        if (loggedIn) {
+            System.out.println("Customer ID: " + customerID + ", Name: " + name);
+            System.out.println("Account Number: " + getAccountNumber() + ", Balance: " + getBalance() + ", Account Type: " + getAccountType());
         } else {
             System.out.println("Access Denied: Please log in to change your phone number.");
         }
     }
-    
-    public void setBirthdate(String birthdate) {
-        if (isLoggedIn()) {
-            this.birthdate = birthdate;
-        } else {
-            System.out.println("Access Denied: Please log in to change your birthdate.");
-        }
+
+    // Getter for Name
+    public String getName() {
+        return name;
     }
 
-    //  Overriding `displayUserInfo()`
+    // Getter for Email
+    public String getEmail() {
+        return email;
+    }
+
+    // toString() method (Displays customer details)
     @Override
-    public void displayUserInfo() {
-        if (isLoggedIn()) {
-            System.out.println("Customer ID: " + customerID + ", Name: " + name + ", Email: " + email + ", Phone: " + phone);
-        } else {
-            System.out.println("Access Denied: Please log in to view your information.");
-        }
+    public String toString() {
+        return "Customer ID: " + customerID + ", Name: " + name + ", Email: " + email + ", Phone: " + phone + ", Birthdate: " + birthdate;
     }
 }
