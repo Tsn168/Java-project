@@ -12,8 +12,8 @@ public class Card {
     String card_holder;
     private double creditLimit;
     private double balance;
-    private String password;
-    private static ArrayList<String> customer_cards= new ArrayList<>();
+    protected String password;
+    protected static ArrayList<String> customer_cards= new ArrayList<>();
     Card() {
         status = "Active";
         exp_date = "Empty";
