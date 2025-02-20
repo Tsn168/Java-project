@@ -7,7 +7,7 @@ public class Account extends User {
 
     private int accountNumber;
     private double balance;
-    private String accountType; // "Saving" or "Normal"
+    private String accountType;
     private Customer owner;
     private boolean isAdmin; // True = Admin, False = User
 
@@ -26,7 +26,12 @@ public class Account extends User {
 
     // Getter Methods
     public int getAccountNumber() {
-        return accountNumber;
+        if (isLoggedIn()) {
+            return accountNumber;
+        } else {
+            System.out.println("Access Denied: Please log in to view your account number.");
+            return -1; // Or throw an exception
+        }
     }
 
     public String getAccountType() {
@@ -54,7 +59,24 @@ public class Account extends User {
         }
     }
 
-    // Deposit Money (Checks if logged in)
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public String getEmail() {
+        return getEmail(); // Inherited from User class
+    }
+
+    // Setter for balance (Controlled modification)
+    public void setBalance(double newBalance) {
+        if (newBalance >= 0) {
+            this.balance = newBalance;
+        } else {
+            System.out.println("Error: Balance cannot be negative.");
+        }
+    }
+
+    //  Deposit Money
     public void deposit(double amount) {
         if (owner.isLoggedIn()) {
             if (amount > 0) {
@@ -68,7 +90,7 @@ public class Account extends User {
         }
     }
 
-    // Withdraw Money (Checks if logged in)
+    //  Withdraw Money
     public void withdraw(double amount) {
         if (owner.isLoggedIn()) {
             if (amount > 0 && amount <= balance) {
@@ -78,7 +100,8 @@ public class Account extends User {
                 System.out.println("Error: Invalid withdrawal amount or insufficient funds.");
             }
         } else {
-            System.out.println("Access Denied: Please log in first.");
+            System.out.println("Access Denied: Please log in to view your balance.");
+            return -1; // Or throw an exception
         }
     }
 
@@ -95,7 +118,16 @@ public class Account extends User {
     // toString() method (Displays account details)
     @Override
     public String toString() {
-        return "Account Number: " + accountNumber + ", Type: " + accountType + ", Balance: $" + balance +
-               ", Owner: " + owner.getName() + ", Role: " + (isAdmin ? "Admin" : "User");
+        return "Account Number: " + accountNumber + ", Type: " + accountType + ", Balance: $" + balance + ", Owner: " + owner.getName();
+    }
+
+    // DisplayUserInfo method (Implementation of DisplayInfo interface)
+    @Override
+    public void displayUserInfo() {
+        System.out.println("Account Information:");
+        System.out.println("Account Number: " + accountNumber);
+        System.out.println("Account Type: " + accountType);
+        System.out.println("Balance: $" + balance);
+        System.out.println("Owner: " + owner.getName());
     }
 }

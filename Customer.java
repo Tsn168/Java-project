@@ -23,6 +23,9 @@ public class Customer extends Account {  // Customer now extends Account
         customerList.add(this); // Adds new customer to the list
     }
 
+    // Adds an account to the customer
+    public void addAccount(Account account) {
+        accounts.add(account);
     // Constructor for Login (Used to check credentials)
     public Customer(String email, String password) {
         super(0, "Normal", null, email, password, false);  // Placeholder values for Account constructor
@@ -49,7 +52,8 @@ public class Customer extends Account {  // Customer now extends Account
             loggedIn = false;
             System.out.println("You have been logged out.");
         } else {
-            System.out.println("You are not logged in.");
+            System.out.println("Access Denied: Please log in to view your name.");
+            return null;
         }
     }
 
@@ -72,7 +76,7 @@ public class Customer extends Account {  // Customer now extends Account
             System.out.println("Customer ID: " + customerID + ", Name: " + name);
             System.out.println("Account Number: " + getAccountNumber() + ", Balance: " + getBalance() + ", Account Type: " + getAccountType());
         } else {
-            System.out.println("Access Denied: Please log in first.");
+            System.out.println("Access Denied: Please log in to change your phone number.");
         }
     }
 
